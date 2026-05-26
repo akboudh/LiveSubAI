@@ -1,8 +1,11 @@
 import AppKit
 
 final class OverlayContentView: NSView {
-    private let subtitleLabel = NSTextField(labelWithString: "")
+    private let primaryLabel = NSTextField(labelWithString: "")
+    private let secondaryLabel = NSTextField(labelWithString: "")
+    private let labelStack = NSStackView()
     private var currentText = ""
+    private var currentSecondaryText: String?
     private var currentFinalized = true
 
     override init(frame frameRect: NSRect) {
@@ -10,28 +13,26 @@ final class OverlayContentView: NSView {
         wantsLayer = true
         layer?.backgroundColor = NSColor.clear.cgColor
 
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.alignment = .center
-        subtitleLabel.textColor = .white
-        subtitleLabel.font = .systemFont(ofSize: 34, weight: .semibold)
-        subtitleLabel.maximumNumberOfLines = 2
-        subtitleLabel.lineBreakMode = .byWordWrapping
-        subtitleLabel.cell?.usesSingleLineMode = false
-        subtitleLabel.cell?.wraps = true
-        subtitleLabel.cell?.isScrollable = false
-        subtitleLabel.cell?.truncatesLastVisibleLine = true
-        subtitleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        subtitleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        subtitleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        configure(label: primaryLabel, maxLines: 2)
+        configure(label: secondaryLabel, maxLines: 1)
+        secondaryLabel.textColor = NSColor.white.withAlphaComponent(0.68)
 
-        addSubview(subtitleLabel)
+        labelStack.translatesAutoresizingMaskIntoConstraints = false
+        labelStack.orientation = .vertical
+        labelStack.alignment = .centerX
+        labelStack.spacing = 6
+        labelStack.addArrangedSubview(primaryLabel)
+        labelStack.addArrangedSubview(secondaryLabel)
+        addSubview(labelStack)
 
         NSLayoutConstraint.activate([
-            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 34),
-            subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -34),
-            subtitleLabel.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 20),
-            subtitleLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20),
-            subtitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 34),
+            labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -34),
+            labelStack.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 16),
+            labelStack.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -16),
+            labelStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            primaryLabel.widthAnchor.constraint(equalTo: labelStack.widthAnchor),
+            secondaryLabel.widthAnchor.constraint(equalTo: labelStack.widthAnchor)
         ])
     }
 
@@ -41,10 +42,19 @@ final class OverlayContentView: NSView {
 
     func update(status: String, text: String, finalized: Bool) {
         let fallbackStatus = status == "Paused" || status == "Listening" ? "" : status
-        currentText = text.isEmpty ? fallbackStatus : text
-        currentFinalized = finalized
-        subtitleLabel.stringValue = currentText
-        subtitleLabel.textColor = finalized ? .white : NSColor.white.withAlphaComponent(0.78)
+        let state = SubtitleDisplayState(primaryText: text.isEmpty ? fallbackStatus : text, secondaryText: nil, isPartial: !finalized)
+        update(state: state)
+    }
+
+    func update(state: SubtitleDisplayState) {
+        currentText = state.primaryText
+        currentSecondaryText = state.secondaryText
+        currentFinalized = !state.isPartial
+        primaryLabel.stringValue = currentText
+        secondaryLabel.stringValue = state.secondaryText ?? ""
+        secondaryLabel.isHidden = (state.secondaryText ?? "").isEmpty
+        primaryLabel.textColor = state.isPartial ? NSColor.white.withAlphaComponent(0.78) : .white
+        secondaryLabel.textColor = NSColor.white.withAlphaComponent(state.isPartial ? 0.48 : 0.68)
         updateSubtitleFont()
         needsDisplay = true
     }
@@ -56,7 +66,8 @@ final class OverlayContentView: NSView {
 
     private func updateSubtitleFont() {
         guard !currentText.isEmpty else {
-            subtitleLabel.font = .systemFont(ofSize: currentFinalized ? 34 : 31, weight: currentFinalized ? .semibold : .medium)
+            primaryLabel.font = .systemFont(ofSize: currentFinalized ? 34 : 31, weight: currentFinalized ? .semibold : .medium)
+            secondaryLabel.font = .systemFont(ofSize: 19, weight: .regular)
             return
         }
 
@@ -68,23 +79,32 @@ final class OverlayContentView: NSView {
 
         for size in stride(from: baseSize, through: minimumSize, by: -1) {
             let font = NSFont.systemFont(ofSize: size, weight: weight)
-            let measuredHeight = measuredTextHeight(font: font, width: availableWidth)
+            let secondaryFont = NSFont.systemFont(ofSize: max(size - 12, 16), weight: .regular)
+            let measuredHeight = measuredTextHeight(text: currentText, font: font, width: availableWidth)
+                + secondaryHeight(font: secondaryFont, width: availableWidth)
             if measuredHeight <= availableHeight {
-                subtitleLabel.font = font
+                primaryLabel.font = font
+                secondaryLabel.font = secondaryFont
                 return
             }
         }
 
-        subtitleLabel.font = .systemFont(ofSize: minimumSize, weight: weight)
+        primaryLabel.font = .systemFont(ofSize: minimumSize, weight: weight)
+        secondaryLabel.font = .systemFont(ofSize: 16, weight: .regular)
     }
 
-    private func measuredTextHeight(font: NSFont, width: CGFloat) -> CGFloat {
+    private func secondaryHeight(font: NSFont, width: CGFloat) -> CGFloat {
+        guard let currentSecondaryText, !currentSecondaryText.isEmpty else { return 0 }
+        return measuredTextHeight(text: currentSecondaryText, font: font, width: width) + 6
+    }
+
+    private func measuredTextHeight(text: String, font: NSFont, width: CGFloat) -> CGFloat {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
         paragraph.lineBreakMode = .byWordWrapping
 
         let attributed = NSAttributedString(
-            string: currentText,
+            string: text,
             attributes: [
                 .font: font,
                 .paragraphStyle: paragraph
@@ -95,6 +115,22 @@ final class OverlayContentView: NSView {
             options: [.usesLineFragmentOrigin, .usesFontLeading]
         )
         return ceil(rect.height)
+    }
+
+    private func configure(label: NSTextField, maxLines: Int) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.alignment = .center
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 34, weight: .semibold)
+        label.maximumNumberOfLines = maxLines
+        label.lineBreakMode = .byWordWrapping
+        label.cell?.usesSingleLineMode = false
+        label.cell?.wraps = true
+        label.cell?.isScrollable = false
+        label.cell?.truncatesLastVisibleLine = true
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
     }
 
     override func draw(_ dirtyRect: NSRect) {

@@ -7,6 +7,8 @@ enum LiveSubAIError: LocalizedError {
     case systemAudioCaptureUnavailable(String)
     case noDisplayAvailable
     case unsupportedAudioFormat
+    case missingTranslationAPIKey
+    case translationUnavailable(String)
     case webSocketDisconnected
 
     var errorDescription: String? {
@@ -23,6 +25,10 @@ enum LiveSubAIError: LocalizedError {
             "No display available for system audio capture"
         case .unsupportedAudioFormat:
             "Unsupported system audio format"
+        case .missingTranslationAPIKey:
+            "Missing DeepL API key"
+        case .translationUnavailable(let message):
+            message
         case .webSocketDisconnected:
             "Deepgram connection disconnected"
         }

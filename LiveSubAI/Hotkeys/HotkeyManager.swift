@@ -3,12 +3,15 @@ import Foundation
 
 final class HotkeyManager {
     private var eventHandler: EventHandlerRef?
-    private var hotKeyRef: EventHotKeyRef?
+    private var subtitleHotKeyRef: EventHotKeyRef?
+    private var translationHotKeyRef: EventHotKeyRef?
     private var toggleHandler: (() -> Void)?
+    private var translationModeHandler: (() -> Void)?
 
-    func registerToggleHotkey(_ handler: @escaping () -> Void) {
+    func registerHotkeys(toggleSubtitles: @escaping () -> Void, toggleTranslationMode: @escaping () -> Void) {
         unregisterAll()
-        toggleHandler = handler
+        toggleHandler = toggleSubtitles
+        translationModeHandler = toggleTranslationMode
 
         var eventType = EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed))
         InstallEventHandler(GetApplicationEventTarget(), { _, eventRef, userData in
@@ -26,30 +29,48 @@ final class HotkeyManager {
             )
             if hotKeyID.id == 1 {
                 manager.toggleHandler?()
+            } else if hotKeyID.id == 2 {
+                manager.translationModeHandler?()
             }
             return noErr
         }, 1, &eventType, Unmanaged.passUnretained(self).toOpaque(), &eventHandler)
 
-        let hotKeyID = EventHotKeyID(signature: fourCharacterCode("LSAI"), id: 1)
+        let subtitleHotKeyID = EventHotKeyID(signature: fourCharacterCode("LSAI"), id: 1)
         RegisterEventHotKey(
             UInt32(kVK_ANSI_S),
             UInt32(cmdKey | optionKey),
-            hotKeyID,
+            subtitleHotKeyID,
             GetApplicationEventTarget(),
             0,
-            &hotKeyRef
+            &subtitleHotKeyRef
+        )
+
+        let translationHotKeyID = EventHotKeyID(signature: fourCharacterCode("LSAI"), id: 2)
+        RegisterEventHotKey(
+            UInt32(kVK_ANSI_T),
+            UInt32(cmdKey | optionKey),
+            translationHotKeyID,
+            GetApplicationEventTarget(),
+            0,
+            &translationHotKeyRef
         )
     }
 
     func unregisterAll() {
-        if let hotKeyRef {
-            UnregisterEventHotKey(hotKeyRef)
-            self.hotKeyRef = nil
+        if let subtitleHotKeyRef {
+            UnregisterEventHotKey(subtitleHotKeyRef)
+            self.subtitleHotKeyRef = nil
+        }
+        if let translationHotKeyRef {
+            UnregisterEventHotKey(translationHotKeyRef)
+            self.translationHotKeyRef = nil
         }
         if let eventHandler {
             RemoveEventHandler(eventHandler)
             self.eventHandler = nil
         }
+        toggleHandler = nil
+        translationModeHandler = nil
     }
 
     private func fourCharacterCode(_ code: String) -> OSType {

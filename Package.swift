@@ -14,12 +14,17 @@ let package = Package(
         .executableTarget(
             name: "LiveSubAI",
             path: "LiveSubAI",
+            exclude: ["App/Info.plist"],
             linkerSettings: [
                 .linkedFramework("AppKit"),
                 .linkedFramework("AVFoundation"),
                 .linkedFramework("Carbon"),
                 .linkedFramework("Security")
             ]
+        ),
+        .testTarget(
+            name: "LiveSubAITests",
+            dependencies: ["LiveSubAI"]
         )
     ]
 )

@@ -4,6 +4,8 @@ import AppKit
 protocol ControlWindowControllerDelegate: AnyObject {
     func controlWindowDidToggleSubtitles()
     func controlWindowDidRequestAPIKey()
+    func controlWindowDidRequestTranslationAPIKey()
+    func controlWindowDidToggleCaptionMode()
     func controlWindowDidRequestShowOverlay()
     func controlWindowDidQuit()
 }
@@ -13,6 +15,7 @@ final class ControlWindowController {
     private let window: NSWindow
     private let statusLabel = NSTextField(labelWithString: "Paused")
     private let toggleButton = NSButton(title: "Start Subtitles", target: nil, action: nil)
+    private let captionModeButton = NSButton(title: "Mode: Original Only", target: nil, action: nil)
     private weak var delegate: ControlWindowControllerDelegate?
 
     init(delegate: ControlWindowControllerDelegate) {
@@ -29,9 +32,13 @@ final class ControlWindowController {
         statusLabel.alignment = .center
 
         toggleButton.bezelStyle = .rounded
+        captionModeButton.bezelStyle = .rounded
 
         let keyButton = NSButton(title: "Set Deepgram API Key", target: nil, action: nil)
         keyButton.bezelStyle = .rounded
+
+        let translationKeyButton = NSButton(title: "Set DeepL API Key", target: nil, action: nil)
+        translationKeyButton.bezelStyle = .rounded
 
         let overlayButton = NSButton(title: "Show Overlay", target: nil, action: nil)
         overlayButton.bezelStyle = .rounded
@@ -39,7 +46,7 @@ final class ControlWindowController {
         let quitButton = NSButton(title: "Quit", target: nil, action: nil)
         quitButton.bezelStyle = .rounded
 
-        let buttonStack = NSStackView(views: [toggleButton, keyButton, overlayButton, quitButton])
+        let buttonStack = NSStackView(views: [toggleButton, captionModeButton, keyButton, translationKeyButton, overlayButton, quitButton])
         buttonStack.orientation = .vertical
         buttonStack.spacing = 10
         buttonStack.distribution = .fillEqually
@@ -55,11 +62,11 @@ final class ControlWindowController {
             stack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             stack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stack.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -64),
-            buttonStack.widthAnchor.constraint(equalToConstant: 220)
+            buttonStack.widthAnchor.constraint(equalToConstant: 240)
         ])
 
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 420, height: 210),
+            contentRect: NSRect(x: 0, y: 0, width: 420, height: 300),
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered,
             defer: false
@@ -73,8 +80,12 @@ final class ControlWindowController {
 
         toggleButton.target = self
         toggleButton.action = #selector(toggleSubtitles)
+        captionModeButton.target = self
+        captionModeButton.action = #selector(toggleCaptionMode)
         keyButton.target = self
         keyButton.action = #selector(setAPIKey)
+        translationKeyButton.target = self
+        translationKeyButton.action = #selector(setTranslationAPIKey)
         overlayButton.target = self
         overlayButton.action = #selector(showOverlay)
         quitButton.target = self
@@ -106,12 +117,24 @@ final class ControlWindowController {
         statusLabel.stringValue = status
     }
 
+    func setCaptionMode(_ mode: CaptionMode) {
+        captionModeButton.title = "Mode: \(mode.title)"
+    }
+
     @objc private func toggleSubtitles() {
         delegate?.controlWindowDidToggleSubtitles()
     }
 
+    @objc private func toggleCaptionMode() {
+        delegate?.controlWindowDidToggleCaptionMode()
+    }
+
     @objc private func setAPIKey() {
         delegate?.controlWindowDidRequestAPIKey()
+    }
+
+    @objc private func setTranslationAPIKey() {
+        delegate?.controlWindowDidRequestTranslationAPIKey()
     }
 
     @objc private func showOverlay() {

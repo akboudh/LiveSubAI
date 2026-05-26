@@ -47,6 +47,16 @@ final class OverlayWindowController {
     func update(status: String, text: String, finalized: Bool = true) {
         keepOnActiveScreen()
         contentView.update(status: status, text: text, finalized: finalized)
+        updateAlpha(status: status, text: text, finalized: finalized)
+    }
+
+    func update(status: String, state: SubtitleDisplayState) {
+        keepOnActiveScreen()
+        contentView.update(state: state)
+        updateAlpha(status: status, text: state.primaryText, finalized: !state.isPartial)
+    }
+
+    private func updateAlpha(status: String, text: String, finalized: Bool) {
         fadeWorkItem?.cancel()
 
         NSAnimationContext.runAnimationGroup { context in

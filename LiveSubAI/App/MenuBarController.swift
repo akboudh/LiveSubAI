@@ -4,6 +4,8 @@ import AppKit
 protocol MenuBarControllerDelegate: AnyObject {
     func menuBarDidToggleSubtitles()
     func menuBarDidRequestAPIKey()
+    func menuBarDidRequestTranslationAPIKey()
+    func menuBarDidToggleCaptionMode()
     func menuBarDidRequestShowOverlay()
     func menuBarDidQuit()
 }
@@ -13,6 +15,7 @@ final class MenuBarController {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private weak var delegate: MenuBarControllerDelegate?
     private let toggleItem = NSMenuItem(title: "Start Subtitles", action: #selector(toggleSubtitles), keyEquivalent: "")
+    private let captionModeItem = NSMenuItem(title: "Mode: Original Only", action: #selector(toggleCaptionMode), keyEquivalent: "")
 
     init(delegate: MenuBarControllerDelegate) {
         self.delegate = delegate
@@ -37,6 +40,9 @@ final class MenuBarController {
         toggleItem.target = self
         menu.addItem(toggleItem)
 
+        captionModeItem.target = self
+        menu.addItem(captionModeItem)
+
         let showOverlayItem = NSMenuItem(title: "Show Overlay", action: #selector(showOverlay), keyEquivalent: "")
         showOverlayItem.target = self
         menu.addItem(showOverlayItem)
@@ -44,6 +50,10 @@ final class MenuBarController {
         let keyItem = NSMenuItem(title: "Set Deepgram API Key...", action: #selector(setAPIKey), keyEquivalent: "")
         keyItem.target = self
         menu.addItem(keyItem)
+
+        let translationKeyItem = NSMenuItem(title: "Set DeepL API Key...", action: #selector(setTranslationAPIKey), keyEquivalent: "")
+        translationKeyItem.target = self
+        menu.addItem(translationKeyItem)
 
         menu.addItem(.separator())
 
@@ -58,12 +68,24 @@ final class MenuBarController {
         toggleItem.title = running ? "Stop Subtitles" : "Start Subtitles"
     }
 
+    func setCaptionMode(_ mode: CaptionMode) {
+        captionModeItem.title = "Mode: \(mode.title)"
+    }
+
     @objc private func toggleSubtitles() {
         delegate?.menuBarDidToggleSubtitles()
     }
 
+    @objc private func toggleCaptionMode() {
+        delegate?.menuBarDidToggleCaptionMode()
+    }
+
     @objc private func setAPIKey() {
         delegate?.menuBarDidRequestAPIKey()
+    }
+
+    @objc private func setTranslationAPIKey() {
+        delegate?.menuBarDidRequestTranslationAPIKey()
     }
 
     @objc private func showOverlay() {

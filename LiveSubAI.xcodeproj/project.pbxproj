@@ -17,11 +17,15 @@
 		100000000000000000000006 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000006 /* HotkeyManager.swift */; };
 		100000000000000000000007 /* LiveSubAIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000007 /* LiveSubAIError.swift */; };
 		100000000000000000000008 /* TranscriptEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000008 /* TranscriptEvent.swift */; };
+		100000000000000000000011 /* CaptionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000011 /* CaptionMode.swift */; };
+		100000000000000000000012 /* SubtitleDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000012 /* SubtitleDisplayState.swift */; };
 		100000000000000000000009 /* OverlayContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000009 /* OverlayContentView.swift */; };
 		10000000000000000000000A /* OverlayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000A /* OverlayWindowController.swift */; };
 		10000000000000000000000B /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000B /* SettingsManager.swift */; };
 		10000000000000000000000C /* DeepgramStreamingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000C /* DeepgramStreamingClient.swift */; };
 		10000000000000000000000D /* DeepgramTranscriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000D /* DeepgramTranscriptParser.swift */; };
+		100000000000000000000013 /* DeepLTranslationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000013 /* DeepLTranslationClient.swift */; };
+		100000000000000000000014 /* TranslationOrderingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000014 /* TranslationOrderingBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +40,15 @@
 		200000000000000000000006 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkeys/HotkeyManager.swift; sourceTree = "<group>"; };
 		200000000000000000000007 /* LiveSubAIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/LiveSubAIError.swift; sourceTree = "<group>"; };
 		200000000000000000000008 /* TranscriptEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/TranscriptEvent.swift; sourceTree = "<group>"; };
+		200000000000000000000011 /* CaptionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/CaptionMode.swift; sourceTree = "<group>"; };
+		200000000000000000000012 /* SubtitleDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/SubtitleDisplayState.swift; sourceTree = "<group>"; };
 		200000000000000000000009 /* OverlayContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay/OverlayContentView.swift; sourceTree = "<group>"; };
 		20000000000000000000000A /* OverlayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay/OverlayWindowController.swift; sourceTree = "<group>"; };
 		20000000000000000000000B /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings/SettingsManager.swift; sourceTree = "<group>"; };
 		20000000000000000000000C /* DeepgramStreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streaming/DeepgramStreamingClient.swift; sourceTree = "<group>"; };
 		20000000000000000000000D /* DeepgramTranscriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcription/DeepgramTranscriptParser.swift; sourceTree = "<group>"; };
+		200000000000000000000013 /* DeepLTranslationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation/DeepLTranslationClient.swift; sourceTree = "<group>"; };
+		200000000000000000000014 /* TranslationOrderingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation/TranslationOrderingBuffer.swift; sourceTree = "<group>"; };
 		20000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,11 +84,15 @@
 				200000000000000000000006 /* HotkeyManager.swift */,
 				200000000000000000000007 /* LiveSubAIError.swift */,
 				200000000000000000000008 /* TranscriptEvent.swift */,
+				200000000000000000000011 /* CaptionMode.swift */,
+				200000000000000000000012 /* SubtitleDisplayState.swift */,
 				200000000000000000000009 /* OverlayContentView.swift */,
 				20000000000000000000000A /* OverlayWindowController.swift */,
 				20000000000000000000000B /* SettingsManager.swift */,
 				20000000000000000000000C /* DeepgramStreamingClient.swift */,
 				20000000000000000000000D /* DeepgramTranscriptParser.swift */,
+				200000000000000000000013 /* DeepLTranslationClient.swift */,
+				200000000000000000000014 /* TranslationOrderingBuffer.swift */,
 				20000000000000000000000E /* Info.plist */,
 			);
 			path = LiveSubAI;
@@ -161,11 +173,15 @@
 				100000000000000000000006 /* HotkeyManager.swift in Sources */,
 				100000000000000000000007 /* LiveSubAIError.swift in Sources */,
 				100000000000000000000008 /* TranscriptEvent.swift in Sources */,
+				100000000000000000000011 /* CaptionMode.swift in Sources */,
+				100000000000000000000012 /* SubtitleDisplayState.swift in Sources */,
 				100000000000000000000009 /* OverlayContentView.swift in Sources */,
 				10000000000000000000000A /* OverlayWindowController.swift in Sources */,
 				10000000000000000000000B /* SettingsManager.swift in Sources */,
 				10000000000000000000000C /* DeepgramStreamingClient.swift in Sources */,
 				10000000000000000000000D /* DeepgramTranscriptParser.swift in Sources */,
+				100000000000000000000013 /* DeepLTranslationClient.swift in Sources */,
+				100000000000000000000014 /* TranslationOrderingBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

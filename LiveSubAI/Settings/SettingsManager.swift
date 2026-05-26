@@ -4,9 +4,26 @@ import Security
 final class SettingsManager {
     private let service = "com.livesubai.app"
     private let deepgramAccount = "deepgram-api-key"
+    private let deepLAccount = "deepl-api-key"
 
     func deepgramAPIKey() throws -> String? {
-        var query = baseQuery(account: deepgramAccount)
+        try apiKey(account: deepgramAccount)
+    }
+
+    func setDeepgramAPIKey(_ key: String) throws {
+        try setAPIKey(key, account: deepgramAccount)
+    }
+
+    func deepLAPIKey() throws -> String? {
+        try apiKey(account: deepLAccount)
+    }
+
+    func setDeepLAPIKey(_ key: String) throws {
+        try setAPIKey(key, account: deepLAccount)
+    }
+
+    private func apiKey(account: String) throws -> String? {
+        var query = baseQuery(account: account)
         query[kSecReturnData as String] = true
         query[kSecMatchLimit as String] = kSecMatchLimitOne
 
@@ -24,12 +41,12 @@ final class SettingsManager {
         return String(data: data, encoding: .utf8)
     }
 
-    func setDeepgramAPIKey(_ key: String) throws {
+    private func setAPIKey(_ key: String, account: String) throws {
         let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
         let data = Data(trimmed.utf8)
-        let query = baseQuery(account: deepgramAccount)
+        let query = baseQuery(account: account)
         let attributes = [kSecValueData as String: data]
         let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
         if status == errSecItemNotFound {

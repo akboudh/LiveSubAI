@@ -15,6 +15,7 @@ final class DeepgramStreamingClient: NSObject {
         var components = URLComponents(string: "wss://api.deepgram.com/v1/listen")!
         components.queryItems = [
             URLQueryItem(name: "model", value: "nova-3"),
+            URLQueryItem(name: "language", value: "multi"),
             URLQueryItem(name: "encoding", value: "linear16"),
             URLQueryItem(name: "sample_rate", value: "16000"),
             URLQueryItem(name: "channels", value: "1"),
