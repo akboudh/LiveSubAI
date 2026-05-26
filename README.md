@@ -35,6 +35,18 @@ If Xcode is in `~/Downloads/Xcode.app`, the script uses that automatically.
 
 ## API Key
 
+LiveSubAI uses Deepgram for live speech-to-text, so you need a Deepgram API key.
+
+To get one:
+
+1. Create or log in to a Deepgram account at [console.deepgram.com](https://console.deepgram.com/).
+2. Select a project from the project dropdown.
+3. Open **Settings**.
+4. Open **API Keys**.
+5. Click **Create a New API Key**.
+6. Give it a recognizable name, choose the permissions/role Deepgram recommends for API usage, and create it.
+7. Copy the key secret immediately and keep it somewhere safe. Deepgram does not show the full secret again after creation.
+
 On first run, use **Set Deepgram API Key** in the control window or menu bar.
 
 You can also seed Keychain once with:
