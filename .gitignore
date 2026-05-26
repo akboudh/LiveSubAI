@@ -1,0 +1,12 @@
+.build/
+dist/
+.DS_Store
+xcuserdata/
+*.xcuserstate
+.env
+.env.*
+*.p12
+*.mobileprovision
+*.xcarchive
+*.zip
+*.zip.sha256

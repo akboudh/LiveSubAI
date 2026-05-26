@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000001 /* LiveSubAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000001 /* LiveSubAIApp.swift */; };
+		100000000000000000000010 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000010 /* main.swift */; };
+		100000000000000000000002 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000002 /* AppCoordinator.swift */; };
+		100000000000000000000003 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000003 /* MenuBarController.swift */; };
+		10000000000000000000000F /* ControlWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000F /* ControlWindowController.swift */; };
+		100000000000000000000004 /* AudioCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* AudioCaptureManager.swift */; };
+		100000000000000000000005 /* PCMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* PCMConverter.swift */; };
+		100000000000000000000006 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000006 /* HotkeyManager.swift */; };
+		100000000000000000000007 /* LiveSubAIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000007 /* LiveSubAIError.swift */; };
+		100000000000000000000008 /* TranscriptEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000008 /* TranscriptEvent.swift */; };
+		100000000000000000000009 /* OverlayContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000009 /* OverlayContentView.swift */; };
+		10000000000000000000000A /* OverlayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000A /* OverlayWindowController.swift */; };
+		10000000000000000000000B /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000B /* SettingsManager.swift */; };
+		10000000000000000000000C /* DeepgramStreamingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000C /* DeepgramStreamingClient.swift */; };
+		10000000000000000000000D /* DeepgramTranscriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000D /* DeepgramTranscriptParser.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		200000000000000000000000 /* LiveSubAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveSubAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200000000000000000000001 /* LiveSubAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/LiveSubAIApp.swift; sourceTree = "<group>"; };
+		200000000000000000000010 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/main.swift; sourceTree = "<group>"; };
+		200000000000000000000002 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppCoordinator.swift; sourceTree = "<group>"; };
+		200000000000000000000003 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/MenuBarController.swift; sourceTree = "<group>"; };
+		20000000000000000000000F /* ControlWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/ControlWindowController.swift; sourceTree = "<group>"; };
+		200000000000000000000004 /* AudioCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio/AudioCaptureManager.swift; sourceTree = "<group>"; };
+		200000000000000000000005 /* PCMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio/PCMConverter.swift; sourceTree = "<group>"; };
+		200000000000000000000006 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkeys/HotkeyManager.swift; sourceTree = "<group>"; };
+		200000000000000000000007 /* LiveSubAIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/LiveSubAIError.swift; sourceTree = "<group>"; };
+		200000000000000000000008 /* TranscriptEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/TranscriptEvent.swift; sourceTree = "<group>"; };
+		200000000000000000000009 /* OverlayContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay/OverlayContentView.swift; sourceTree = "<group>"; };
+		20000000000000000000000A /* OverlayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay/OverlayWindowController.swift; sourceTree = "<group>"; };
+		20000000000000000000000B /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings/SettingsManager.swift; sourceTree = "<group>"; };
+		20000000000000000000000C /* DeepgramStreamingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streaming/DeepgramStreamingClient.swift; sourceTree = "<group>"; };
+		20000000000000000000000D /* DeepgramTranscriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcription/DeepgramTranscriptParser.swift; sourceTree = "<group>"; };
+		20000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App/Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		300000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		400000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				400000000000000000000002 /* LiveSubAI */,
+				400000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		400000000000000000000002 /* LiveSubAI */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000001 /* LiveSubAIApp.swift */,
+				200000000000000000000010 /* main.swift */,
+				200000000000000000000002 /* AppCoordinator.swift */,
+				200000000000000000000003 /* MenuBarController.swift */,
+				20000000000000000000000F /* ControlWindowController.swift */,
+				200000000000000000000004 /* AudioCaptureManager.swift */,
+				200000000000000000000005 /* PCMConverter.swift */,
+				200000000000000000000006 /* HotkeyManager.swift */,
+				200000000000000000000007 /* LiveSubAIError.swift */,
+				200000000000000000000008 /* TranscriptEvent.swift */,
+				200000000000000000000009 /* OverlayContentView.swift */,
+				20000000000000000000000A /* OverlayWindowController.swift */,
+				20000000000000000000000B /* SettingsManager.swift */,
+				20000000000000000000000C /* DeepgramStreamingClient.swift */,
+				20000000000000000000000D /* DeepgramTranscriptParser.swift */,
+				20000000000000000000000E /* Info.plist */,
+			);
+			path = LiveSubAI;
+			sourceTree = "<group>";
+		};
+		400000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000000 /* LiveSubAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		500000000000000000000001 /* LiveSubAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 600000000000000000000003 /* Build configuration list for PBXNativeTarget "LiveSubAI" */;
+			buildPhases = (
+				700000000000000000000001 /* Sources */,
+				300000000000000000000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiveSubAI;
+			productName = LiveSubAI;
+			productReference = 200000000000000000000000 /* LiveSubAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		800000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					500000000000000000000001 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+				};
+			};
+			buildConfigurationList = 600000000000000000000001 /* Build configuration list for PBXProject "LiveSubAI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 400000000000000000000001;
+			productRefGroup = 400000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				500000000000000000000001 /* LiveSubAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		700000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000001 /* LiveSubAIApp.swift in Sources */,
+				100000000000000000000010 /* main.swift in Sources */,
+				100000000000000000000002 /* AppCoordinator.swift in Sources */,
+				100000000000000000000003 /* MenuBarController.swift in Sources */,
+				10000000000000000000000F /* ControlWindowController.swift in Sources */,
+				100000000000000000000004 /* AudioCaptureManager.swift in Sources */,
+				100000000000000000000005 /* PCMConverter.swift in Sources */,
+				100000000000000000000006 /* HotkeyManager.swift in Sources */,
+				100000000000000000000007 /* LiveSubAIError.swift in Sources */,
+				100000000000000000000008 /* TranscriptEvent.swift in Sources */,
+				100000000000000000000009 /* OverlayContentView.swift in Sources */,
+				10000000000000000000000A /* OverlayWindowController.swift in Sources */,
+				10000000000000000000000B /* SettingsManager.swift in Sources */,
+				10000000000000000000000C /* DeepgramStreamingClient.swift in Sources */,
+				10000000000000000000000D /* DeepgramTranscriptParser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		600000000000000000000004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiveSubAI/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.livesubai.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		600000000000000000000005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiveSubAI/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.livesubai.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		600000000000000000000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		600000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		600000000000000000000001 /* Build configuration list for PBXProject "LiveSubAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				600000000000000000000002 /* Debug */,
+				600000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		600000000000000000000003 /* Build configuration list for PBXNativeTarget "LiveSubAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				600000000000000000000004 /* Debug */,
+				600000000000000000000005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 800000000000000000000001 /* Project object */;
+}
